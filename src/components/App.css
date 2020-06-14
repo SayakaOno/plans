@@ -1,0 +1,8 @@
+@import '~antd/dist/antd.css';
+
+#main-target .ant-card-body {
+  padding-left: 31px;
+}
+#main-target canvas {
+  margin-left: -14px;
+}
