@@ -1,31 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Table, Row } from 'antd';
-import { Button, Space } from 'antd';
+import { Card, Table, Row, Tag } from 'antd';
 
 const data = [
   {
     key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park'
+    todo: 'todo1',
+    genre: 'カテゴリー1',
+    eta: '30:00',
+    completed: '0:00',
+    estimatedCompletion: '30:00',
+    idealCompletion: '30:00'
   },
   {
     key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park'
+    todo: 'todo2',
+    genre: 'カテゴリー2',
+    eta: '40:00',
+    completed: '0:00',
+    estimatedCompletion: '30:00',
+    idealCompletion: '30:00'
   },
   {
     key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park'
+    todo: 'todo3',
+    genre: 'カテゴリー3',
+    eta: '50:00',
+    completed: '0:00',
+    estimatedCompletion: '30:00',
+    idealCompletion: '30:00'
   },
   {
     key: '4',
-    name: 'Jim Red',
-    age: 32,
-    address: 'London No. 2 Lake Park'
+    todo: 'todo4',
+    genre: 'カテゴリー4',
+    eta: '60:00',
+    completed: '0:00',
+    estimatedCompletion: '30:00',
+    idealCompletion: '30:00'
   }
 ];
 
@@ -39,54 +50,63 @@ const ToDo = props => {
     setSortedInfo(sorter);
   };
 
-  const clearFilters = () => {
-    setFilteredInfo({});
-  };
-
-  const clearAll = () => {
-    setFilteredInfo({});
-    setSortedInfo({});
-  };
-
-  const setAgeSort = () => {
-    setSortedInfo({
-      order: 'descend',
-      columnKey: 'age'
-    });
-  };
   useEffect(() => {});
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      filters: [{ text: 'Joe', value: 'Joe' }, { text: 'Jim', value: 'Jim' }],
-      filteredValue: filteredInfo.name || null,
-      onFilter: (value, record) => record.name.includes(value),
-      sorter: (a, b) => a.name.length - b.name.length,
-      sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-      ellipsis: true
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-      sorter: (a, b) => a.age - b.age,
-      sortOrder: sortedInfo.columnKey === 'age' && sortedInfo.order,
-      ellipsis: true
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: 'ToDo',
+      dataIndex: 'genre',
+      key: 'genre',
       filters: [
-        { text: 'London', value: 'London' },
-        { text: 'New York', value: 'New York' }
+        { text: 'カテゴリー1', value: 'カテゴリー1' },
+        { text: 'カテゴリー2', value: 'カテゴリー2' }
       ],
-      filteredValue: filteredInfo.address || null,
-      onFilter: (value, record) => record.address.includes(value),
-      sorter: (a, b) => a.address.length - b.address.length,
-      sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
+      filteredValue: filteredInfo.genre || null,
+      onFilter: (value, record) => record.genre.includes(value),
+      ellipsis: true,
+      render: (genre, data) => {
+        return (
+          <>
+            <span style={{ display: 'inline-block', marginRight: 10 }}>
+              {data.todo}
+            </span>
+            <Tag color="blue" key={genre}>
+              {genre}
+            </Tag>
+          </>
+        );
+      }
+    },
+    {
+      title: '所要時間',
+      dataIndex: 'eta',
+      key: 'eta',
+      sorter: (a, b) => a.eta - b.eta,
+      sortOrder: sortedInfo.columnKey === 'eta' && sortedInfo.order,
+      ellipsis: true
+    },
+    {
+      title: '完了',
+      dataIndex: 'completed',
+      key: 'completed',
+      sorter: (a, b) => a.completed - b.completed,
+      sortOrder: sortedInfo.columnKey === 'completed' && sortedInfo.order,
+      ellipsis: true
+    },
+    {
+      title: '完了予定時間',
+      dataIndex: 'estimatedCompletion',
+      key: 'estimatedCompletion',
+      sorter: (a, b) => a.estimatedCompletion - b.estimatedCompletion,
+      sortOrder:
+        sortedInfo.columnKey === 'estimatedCompletion' && sortedInfo.order,
+      ellipsis: true
+    },
+    {
+      title: '理想完了時間',
+      dataIndex: 'idealCompletion',
+      key: 'idealCompletion',
+      sorter: (a, b) => a.idealCompletion - b.idealCompletion,
+      sortOrder: sortedInfo.columnKey === 'idealCompletion' && sortedInfo.order,
       ellipsis: true
     }
   ];
@@ -94,14 +114,12 @@ const ToDo = props => {
     <Card id="todos" style={{ width: '100%' }}>
       <h1>ToDo</h1>
       <Row gutter={16}>
-        <>
-          <Space style={{ marginBottom: 16 }}>
-            <Button onClick={setAgeSort}>Sort age</Button>
-            <Button onClick={clearFilters}>Clear filters</Button>
-            <Button onClick={clearAll}>Clear filters and sorters</Button>
-          </Space>
-          <Table columns={columns} dataSource={data} onChange={handleChange} />
-        </>
+        <Table
+          columns={columns}
+          dataSource={data}
+          onChange={handleChange}
+          pagination={false}
+        />
       </Row>
     </Card>
   );
