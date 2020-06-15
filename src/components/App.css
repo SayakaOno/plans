@@ -6,3 +6,26 @@
 #main-target canvas {
   margin-left: -14px;
 }
+#genre-detail .ant-collapse,
+#genre-detail .ant-collapse > .ant-collapse-item {
+  border: none !important;
+  background: #fff;
+}
+#genre-detail .ant-collapse-content {
+  border: none;
+}
+#genre-detail .ant-card-body {
+  padding-left: 31px;
+}
+#genre-detail canvas {
+  margin-left: -14px;
+}
+#genre-detail
+  .ant-collapse-icon-position-right
+  > .ant-collapse-item
+  > .ant-collapse-header {
+  padding-left: 0;
+}
+#genre-detail .task .ant-statistic-content {
+  font-size: 20px;
+}
