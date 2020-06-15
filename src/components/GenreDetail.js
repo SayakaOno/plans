@@ -1,5 +1,14 @@
 import React, { useEffect } from 'react';
-import { Card, Statistic, Row, Col, Progress, Collapse, Divider } from 'antd';
+import {
+  Card,
+  Statistic,
+  Row,
+  Col,
+  Progress,
+  Collapse,
+  Divider,
+  Checkbox
+} from 'antd';
 import { Chart } from '@antv/g2';
 const { Panel } = Collapse;
 
@@ -117,22 +126,58 @@ const GenreDetail = props => {
             <Collapse expandIconPosition="right">
               <Panel header="This is panel header 1" key="1">
                 <ul>
-                  <li>task1</li>
-                  <li>task1</li>
-                  <li>task1</li>
-                  <li>task1</li>
-                  <li>task1</li>
-                  <li>task1</li>
+                  <li>
+                    <Checkbox checked={true} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={true} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={true} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={false} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={false} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={false} />
+                    task1
+                  </li>
                 </ul>
               </Panel>
               <Panel header="This is panel header 2" key="2">
                 <ul>
-                  <li>task1</li>
-                  <li>task1</li>
-                  <li>task1</li>
-                  <li>task1</li>
-                  <li>task1</li>
-                  <li>task1</li>
+                  <li>
+                    <Checkbox checked={true} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={true} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={true} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={false} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={false} />
+                    task1
+                  </li>
+                  <li>
+                    <Checkbox checked={false} />
+                    task1
+                  </li>
                 </ul>
               </Panel>
             </Collapse>

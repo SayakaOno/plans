@@ -29,3 +29,16 @@
 #genre-detail .task .ant-statistic-content {
   font-size: 20px;
 }
+#genre-detail .ant-collapse-content > .ant-collapse-content-box {
+  padding-top: 0;
+}
+#genre-detail .task ul {
+  margin: 0;
+  padding: 0;
+}
+#genre-detail .task li {
+  list-style: none;
+}
+#genre-detail .task li .ant-checkbox-wrapper {
+  margin-right: 10px;
+}
