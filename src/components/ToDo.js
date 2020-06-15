@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Table, Row, Tag } from 'antd';
+import { Card, Table, Row, Tag, Statistic, Col } from 'antd';
 
 const data = [
   {
@@ -7,8 +7,8 @@ const data = [
     todo: 'todo1',
     genre: 'カテゴリー1',
     eta: '30:00',
-    completed: '0:00',
-    estimatedCompletion: '30:00',
+    completed: '0:00 / 20',
+    estimatedCompletion: '30:00 / 20',
     idealCompletion: '30:00'
   },
   {
@@ -16,8 +16,8 @@ const data = [
     todo: 'todo2',
     genre: 'カテゴリー2',
     eta: '40:00',
-    completed: '0:00',
-    estimatedCompletion: '30:00',
+    completed: '0:00 / 20',
+    estimatedCompletion: '30:00 / 20',
     idealCompletion: '30:00'
   },
   {
@@ -25,8 +25,8 @@ const data = [
     todo: 'todo3',
     genre: 'カテゴリー3',
     eta: '50:00',
-    completed: '0:00',
-    estimatedCompletion: '30:00',
+    completed: '0:00 / 20',
+    estimatedCompletion: '30:00 / 20',
     idealCompletion: '30:00'
   },
   {
@@ -34,8 +34,8 @@ const data = [
     todo: 'todo4',
     genre: 'カテゴリー4',
     eta: '60:00',
-    completed: '0:00',
-    estimatedCompletion: '30:00',
+    completed: '0:00 / 20',
+    estimatedCompletion: '30:00 / 20',
     idealCompletion: '30:00'
   }
 ];
@@ -43,6 +43,16 @@ const data = [
 const ToDo = props => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    setSelectedRowKeys(selectedRowKeys);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange
+  };
 
   const handleChange = (pagination, filters, sorter) => {
     console.log('Various parameters', pagination, filters, sorter);
@@ -93,7 +103,7 @@ const ToDo = props => {
       ellipsis: true
     },
     {
-      title: '完了予定時間',
+      title: '完了時合計時間',
       dataIndex: 'estimatedCompletion',
       key: 'estimatedCompletion',
       sorter: (a, b) => a.estimatedCompletion - b.estimatedCompletion,
@@ -102,7 +112,7 @@ const ToDo = props => {
       ellipsis: true
     },
     {
-      title: '理想完了時間',
+      title: '目安合計時間',
       dataIndex: 'idealCompletion',
       key: 'idealCompletion',
       sorter: (a, b) => a.idealCompletion - b.idealCompletion,
@@ -114,10 +124,19 @@ const ToDo = props => {
     <Card id="todos" style={{ width: '100%' }}>
       <h1>ToDo</h1>
       <Row gutter={16}>
+        <Col span={12}>
+          <Statistic title="今日の残り時間" value="300" />
+        </Col>
+        <Col span={12}>
+          <Statistic title="マストToDo所要時間" value="203:20" />
+        </Col>
+      </Row>
+      <Row gutter={16}>
         <Table
           columns={columns}
           dataSource={data}
           onChange={handleChange}
+          rowSelection={rowSelection}
           pagination={false}
         />
       </Row>
